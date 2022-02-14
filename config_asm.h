@@ -260,7 +260,6 @@
 #   define CRYPTOPP_ARM_ASIMD_AVAILABLE 1
 #  endif  // Compilers
 # endif  // Platforms
-
 #endif
 
 // ARMv8 and ASIMD. -march=armv8-a+crc or above must be present
