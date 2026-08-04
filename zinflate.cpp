@@ -398,13 +398,14 @@ void Inflator::DecodeHeader()
 		{
 		if (!m_reader.FillBuffer(5+5+4))
 			throw UnexpectedEndErr();
-		unsigned int hlit = m_reader.GetBits(5);
-		unsigned int hdist = m_reader.GetBits(5);
-		unsigned int hclen = m_reader.GetBits(4);
+		const unsigned int hlit = m_reader.GetBits(5);
+		const unsigned int hdist = m_reader.GetBits(5);
+		const unsigned int hclen = m_reader.GetBits(4);
 		unsigned int i = 0;
 
 		// RFC 1951 allows HLIT values 0 to 29, encoding 257 to 286 literal/length
 		// codes. Values 30 and 31 are invalid and can overrun codeLengths below.
+		CRYPTOPP_ASSERT(hlit <= 29);
 		if (hlit > 29)
 			throw BadBlockErr();
 
