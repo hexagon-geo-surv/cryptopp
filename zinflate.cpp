@@ -413,7 +413,8 @@ void Inflator::DecodeHeader()
 		const unsigned int distanceCount = hdist + 1;
 		const unsigned int codeLengthCount = literalCount + distanceCount;
 
-		FixedSizeSecBlock<unsigned int, 286+32> codeLengths;
+		// 320 follows zlib allocation; see GH #1368
+		FixedSizeSecBlock<unsigned int, 286+32+2> codeLengths;
 		CRYPTOPP_ASSERT(codeLengthCount <= codeLengths.size());
 		static const unsigned int border[] = {    // Order of the bit length code lengths
 			16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
